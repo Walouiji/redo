@@ -28,37 +28,26 @@ export default class ArticleCell extends Component {
 	}
 
 	handleUpdate() {
-		const firebase = new Fire(error => {
-			if (error) {
-				console.error(error);
-			} else {
-				const { article } = this.props;
-				const updatedArticle = {
-					id: article.id,
-					title: article.title,
-					content: this.state.content,
-					createdAt: article.createdAt,
-					comments: article.comments
-				}
-				firebase.updateArticle(updatedArticle)
-				this.setState({
-					isEdit: false,
-				})
-
-			}
+		const firebase = new Fire();
+		const { article } = this.props;
+		const updatedArticle = {
+			id: article.id,
+			title: article.title,
+			content: this.state.content,
+			createdAt: article.createdAt,
+			comments: article.comments
+		}
+		firebase.updateArticle(updatedArticle)
+		this.setState({
+			isEdit: false,
 		})
 	}
 
 	handleDelete() {
-		const firebase = new Fire(error => {
-			if (error) {
-				console.log(error);
-			} else {
-				const { article } = this.props;
-				article.content = this.state.content;
-				firebase.deleteArticle(article);
-			}
-		})
+		const firebase = new Fire();
+		const { article } = this.props;
+		article.content = this.state.content;
+		firebase.deleteArticle(article);
 	}
 
 	render() {
@@ -88,7 +77,7 @@ export default class ArticleCell extends Component {
 							() => { this.setState({ isEdit: true }); }}
 						>{this.props.article.content}</Card.Text>}
 				</Card.Body>
-				<Card.Footer style={{alignItems: 'left'}}>
+				<Card.Footer style={{ alignItems: 'left' }}>
 
 					<Button onClick={() => { this.handleDelete() }} >Delete</Button>
 				</Card.Footer>

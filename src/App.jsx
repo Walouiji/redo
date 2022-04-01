@@ -26,19 +26,12 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    const firebase = new Fire(error => {
-      if (error) {
-        this.setState({
-          error: error
-        });
-      } else {
-        firebase.getArticles(article => {
-          this.setState({
-            articles: article,
-            loading: false
-          });
-        });
-      }
+    const firebase = new Fire();
+    firebase.getArticles(article => {
+      this.setState({
+        articles: article,
+        loading: false
+      });
     });
   }
 

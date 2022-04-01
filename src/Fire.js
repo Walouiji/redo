@@ -15,7 +15,8 @@ import {
 import {
     getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -32,6 +33,12 @@ const db = getFirestore(app)
 const auth = getAuth(app);
 
 export default class Fire {
+
+    constructor() {
+        this.state = {
+            user: null
+        }
+    }
 
     //CRUD articles
     getArticles(callback) {
@@ -62,6 +69,12 @@ export default class Fire {
 
     //Authentification
 
+    setUser = () => {
+        onAuthStateChanged(auth, (currentUser) => {
+            this.setState({user : currentUser})
+          });
+    }
+
     register = async (registerEmail, registerPassword) => {
         try {
             const user = await createUserWithEmailAndPassword(
@@ -83,6 +96,7 @@ export default class Fire {
               loginPassword
             );
             console.log(user);
+            this.setState({user : user});
           } catch (error) {
             console.log(error.message);
           }

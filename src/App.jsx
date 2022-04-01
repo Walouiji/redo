@@ -36,6 +36,8 @@ class App extends React.Component {
   }
 
   render() {
+    const firebase = new Fire();
+    console.log(firebase.state.user);
     return (
       <div className="App">
         <header className="App-header">

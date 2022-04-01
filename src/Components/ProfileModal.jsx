@@ -13,10 +13,10 @@ export default class extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log(this.props.type);
         const firebase = new Fire();
-        firebase.login(this.state.loginEmail, this.state.loginPassword);
-        console.log("email : " + this.state.loginEmail);
-        console.log("password : " + this.state.loginPassword);
+        this.props.type == "login"? firebase.login(this.state.loginEmail, this.state.loginPassword): firebase.register(this.state.loginEmail, this.state.loginPassword)
+        
         this.props.handleCancel();
     }
 

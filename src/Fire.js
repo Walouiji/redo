@@ -69,11 +69,12 @@ export default class Fire {
 
     //Authentification
 
-    setUser = () => {
-        onAuthStateChanged(auth, (currentUser) => {
-            this.setState({user : currentUser})
-          });
+    stateChanged = () => {
+        onAuthStateChanged(auth, (currentUser) => this.setState({
+            user: currentUser
+        }));
     }
+
 
     register = async (registerEmail, registerPassword) => {
         try {
@@ -91,14 +92,16 @@ export default class Fire {
     login = async (loginEmail, loginPassword) => {
         try {
             const user = await signInWithEmailAndPassword(
-              auth,
-              loginEmail,
-              loginPassword
+                auth,
+                loginEmail,
+                loginPassword
             );
             console.log(user);
-            this.setState({user : user});
-          } catch (error) {
+            this.setState({
+                user: user
+            });
+        } catch (error) {
             console.log(error.message);
-          }
+        }
     }
 }

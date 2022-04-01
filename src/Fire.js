@@ -1,4 +1,5 @@
-import firebase from "firebase";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCGOG1Er054mWiDHpvdu1MPrCPGdlfCdmQ",
@@ -9,48 +10,30 @@ const firebaseConfig = {
     appId: "1:938706405579:web:7c97f007252f947165b34e"
 };
 
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
+
 export default class Fire {
-    constructor(callback) {
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                callback(null);
-            } else {
-                firebase.auth().signInAnonymously().catch(error => {
-                    callback(error);
-                });
-            }
-        })
-    }
-
-    get ref() {
-        return firebase.firestore().collection("articles");
-    }
-
     getArticles(callback) {
-        let ref = this.ref.orderBy("createdAt");
-        this.unsubscribe = ref.onSnapshot(snapshot => {
+        const q = query(collection(db, 'articles'), orderBy('createdAt', 'desc'));
+        onSnapshot(q, (snapshot) => {
             let articles = [];
             snapshot.forEach(doc => {
                 articles.push({ id: doc.id, ...doc.data() });
             });
-            callback(articles.reverse());
-        }, function(error) {
-            callback(error);
+            callback(articles);
         });
     }
 
     addArticle(article) {
-        this.ref.add(article);
-    }
-
-    deleteArticle(article) {
-        this.ref.doc(article.id).delete();
+        addDoc(collection(db, 'articles'), article);
     }
 
     updateArticle(article) {
-        this.ref.doc(article.id).update(article);
+        updateDoc(doc(db, 'articles', article.id), article);
+    }
+
+    deleteArticle(article) {
+        deleteDoc(doc(db, 'articles', article.id))
     }
 }

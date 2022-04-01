@@ -10,28 +10,38 @@ export default class ArticleModal extends Component {
 		this.state = {
 			title: "",
 			content: "",
+			category: "",
 		}
 	}
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const firebase = new Fire(error => {
-			if (error) {
-				console.error(error);
-			} else {
-				firebase.addArticle({
-					title: this.state.title,
-					content: this.state.content,
-					createdAt: new Date(),
-					comments: []
-				})
-			}
+		const firebase = new Fire();
+		firebase.addArticle({
+			title: this.state.title,
+			category: this.state.category,
+			content: this.state.content,
+			createdAt: new Date(),
+			comments: []
 		})
 		this.props.handleCancel();
 	}
 
 	handleChange = (e) => {
-		this.setState(e.target.id === "title" ? { title: e.target.value } : { content: e.target.value });
+		switch (e.target.id) {
+			case "title":
+				this.setState({ title: e.target.value });
+				break;
+			case "content":
+				this.setState({ content: e.target.value });
+				break;
+			default:
+				break;
+		}
+		//this.setState(e.target.id === "title" ? { title: e.target.value } : { content: e.target.value });
+	}
 
+	handleCategory = (e) => {
+		this.setState({ category: e.key })
 	}
 
 	componentWillUnmount() {
@@ -51,9 +61,9 @@ export default class ArticleModal extends Component {
 			onCancel={this.props.handleCancel}
 		>
 			<ArticleForm
-				title={this.props.title}
 				handleChange={this.handleChange}
 				handleSubmit={this.handleSubmit}
+				handleCategory={this.handleCategory}
 			/>
 		</Modal>;
 	}

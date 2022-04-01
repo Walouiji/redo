@@ -13,42 +13,23 @@ export default class extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const firebase = new Fire(error => {
-            if (error) {
-                console.error(error);
-                return;
-            }
-            firebase.addArticle({
-                title: this.state.title,
-                content: this.state.content,
-                createdAt: new Date(),
-                comments: []
-            })
-        })
+        const firebase = new Fire();
+        firebase.login(this.state.loginEmail, this.state.loginPassword);
+        console.log("email : " + this.state.loginEmail);
+        console.log("password : " + this.state.loginPassword);
         this.props.handleCancel();
     }
 
     handleChange = (e) => {
-        this.setState(e.target.id === "title" ? { title: e.target.value } : { content: e.target.value });
+        this.setState(e.target.name === "email" ? { loginEmail: e.target.value } : { loginPassword: e.target.value });
 
     }
-
-    login = async () => {
-        const auth = new Fire().auth;
-        const user = await auth.signInWithEmailAndPassword(
-            auth,
-            this.state.loginEmail,
-            this.state.loginPassword
-        );
-        console.log(user);
-
-    };
 
     render() {
         return <Modal
             title={this.props.type}
             visible={this.props.isVisible}
-            onOk={this.props.handleCancel}
+            onOk={this.handleSubmit}
             onCancel={this.props.handleCancel}
         >
             <Form>
@@ -57,14 +38,14 @@ export default class extends Component {
                     name="email"
                     rules={[{ required: true, message: 'Veuillez renseigner un email' }]}
                 >
-                    <Input />
+                    <Input name="email" onChange={this.handleChange} />
                 </Form.Item>
                 <Form.Item
                     label="Mot de passe"
                     name="password"
                     rules={[{ required: true, message: 'Mot de passe requis' }]}
                 >
-                    <Input />
+                    <Input name="password" onChange={this.handleChange} />
                 </Form.Item>
             </Form>
         </Modal>;

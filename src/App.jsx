@@ -57,7 +57,7 @@ class App extends React.Component {
               )}
             </Col>
             <Col>
-              {/* <ProfileCard /> */}
+              <ProfileCard />
             </Col>
           </Row>
         </div>

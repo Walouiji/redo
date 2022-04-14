@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Avatar, Dropdown, Menu } from 'antd';
+import { Avatar, Dropdown } from 'antd';
 
 import '../App.css';
 

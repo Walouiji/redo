@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
-import { Avatar } from "antd";
+import { Avatar, Button } from "antd";
 import ProfileModal from "./ProfileModal";
 import Fire from "../Fire";
 
@@ -52,7 +52,9 @@ export default class ProfileCard extends Component {
                 </Card.Text>
               </div>
             : (
-              <p>bienvenue !</p>
+              <Button onClick={() => firebase.logout()}>
+                Se déconnecter
+              </Button>
             )}
           </Card.Body>
         </Card>

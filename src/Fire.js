@@ -1,6 +1,7 @@
 import {
     initializeApp
 } from "firebase/app";
+
 import {
     getFirestore,
     collection,
@@ -12,11 +13,12 @@ import {
     updateDoc,
     deleteDoc
 } from "firebase/firestore";
+
 import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    onAuthStateChanged,
+    signOut
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -63,7 +65,9 @@ export default class Fire {
 
     //Authentification
 
-    user = getAuth().currentUser;
+    auth = getAuth();
+
+    user = auth.currentUser;
 
     register = async (registerEmail, registerPassword) => {
         try {
@@ -90,4 +94,13 @@ export default class Fire {
             console.log(error.message);
         }
     }
+
+    logout = () => {
+        auth.signOut().then(() => {
+            console.log(this.auth);
+            // Sign-out successful.
+          }).catch((error) => {
+            // An error happened.
+          });
+    };
 }

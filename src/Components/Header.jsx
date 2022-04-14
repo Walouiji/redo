@@ -14,7 +14,8 @@ export default class Header extends Component {
   constructor() {
     super();
     this.state = {
-      isModalVisible: false
+      isModalVisible: false,
+      isDropDownVisible: false,
     }
 
   }

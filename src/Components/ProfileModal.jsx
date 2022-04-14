@@ -15,9 +15,12 @@ export default class extends Component {
         e.preventDefault();
         console.log(this.props.type);
         const firebase = new Fire();
-        this.props.type === "login"? firebase.login(this.state.email, this.state.password): firebase.register(this.state.email, this.state.password)
+        this.props.type === "se connecter"? firebase.login(this.state.email, this.state.password): firebase.register(this.state.email, this.state.password)
         
-        this.props.handleCancel();
+        this.setState({
+            email: "",
+            password: ""
+        })
     }
 
     handleChange = (e) => {

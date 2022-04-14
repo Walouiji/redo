@@ -6,7 +6,7 @@ import Header from './Components/Header';
 import ArticleCell from './Components/ArticleCell';
 import Fire from './Fire';
 import ProfileCard from './Components/ProfileCard';
-import { Row, Col } from 'antd';
+import { Row, Col, Dropdown } from 'antd';
 
 
 class App extends React.Component {
@@ -37,7 +37,6 @@ class App extends React.Component {
 
   render() {
     const firebase = new Fire();
-    firebase.stateChanged();
     return (
       <div className="App">
         <header className="App-header">
@@ -57,9 +56,6 @@ class App extends React.Component {
                   />
                 </ArticleCell>
               )}
-            </Col>
-            <Col>
-              <ProfileCard />
             </Col>
           </Row>
         </div>

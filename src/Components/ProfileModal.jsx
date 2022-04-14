@@ -6,8 +6,8 @@ export default class extends Component {
     constructor() {
         super();
         this.state = {
-            loginEmail: "",
-            loginPassword: "",
+            email: "",
+            password: "",
         }
     }
 
@@ -15,13 +15,13 @@ export default class extends Component {
         e.preventDefault();
         console.log(this.props.type);
         const firebase = new Fire();
-        this.props.type == "login"? firebase.login(this.state.loginEmail, this.state.loginPassword): firebase.register(this.state.loginEmail, this.state.loginPassword)
+        this.props.type === "login"? firebase.login(this.state.email, this.state.password): firebase.register(this.state.email, this.state.password)
         
         this.props.handleCancel();
     }
 
     handleChange = (e) => {
-        this.setState(e.target.name === "email" ? { loginEmail: e.target.value } : { loginPassword: e.target.value });
+        this.setState(e.target.name === "email" ? { email: e.target.value } : { password: e.target.value });
 
     }
 

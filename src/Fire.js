@@ -32,13 +32,7 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const auth = getAuth(app);
 
-export default class Fire {
-
-    constructor() {
-        this.state = {
-            user: null
-        }
-    }
+export default class Fire {    
 
     //CRUD articles
     getArticles(callback) {
@@ -69,12 +63,7 @@ export default class Fire {
 
     //Authentification
 
-    stateChanged = () => {
-        onAuthStateChanged(auth, (currentUser) => this.setState({
-            user: currentUser
-        }));
-    }
-
+    user = getAuth().currentUser;
 
     register = async (registerEmail, registerPassword) => {
         try {
@@ -97,9 +86,6 @@ export default class Fire {
                 loginPassword
             );
             console.log(user);
-            this.setState({
-                user: user
-            });
         } catch (error) {
             console.log(error.message);
         }

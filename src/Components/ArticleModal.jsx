@@ -12,6 +12,7 @@ export default class ArticleModal extends Component {
 			content: "",
 			category: "",
 			imagePath: "",
+			createdBy: ""
 		}
 	}
 	handleSubmit = (e) => {
@@ -23,6 +24,7 @@ export default class ArticleModal extends Component {
 			content: this.state.content,
 			createdAt: new Date(),
 			imagePath: this.state.imagePath,
+			createdBy: firebase.user.email,
 			comments: []
 		})
 		this.props.handleCancel();

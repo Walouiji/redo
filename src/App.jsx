@@ -5,8 +5,7 @@ import ArticleModal from './Components/ArticleModal';
 import Header from './Components/Header';
 import ArticleCell from './Components/ArticleCell';
 import Fire from './Fire';
-import ProfileCard from './Components/ProfileCard';
-import { Row, Col, Dropdown } from 'antd';
+import { Row, Col } from 'antd';
 
 
 class App extends React.Component {
@@ -45,8 +44,6 @@ class App extends React.Component {
           <Header className="App-header" />
         </header>
         <div className="App-body">
-          <Row>
-            <Col>
               {this.state.articles.map((article) =>
                 <ArticleCell key={article.id} article={article}>
                   <AddButton
@@ -58,8 +55,6 @@ class App extends React.Component {
                   />
                 </ArticleCell>
               )}
-            </Col>
-          </Row>
         </div>
         <ArticleModal
           isVisible={this.state.isModalVisible}

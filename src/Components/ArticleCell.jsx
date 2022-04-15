@@ -1,5 +1,6 @@
 // import { Card, Avatar } from 'antd'
 import { Row, Col, Avatar, Image } from 'antd';
+import { DeleteFilled, MessageFilled } from '@ant-design/icons'
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import TextArea from 'antd/lib/input/TextArea';
@@ -77,14 +78,17 @@ export default class ArticleCell extends Component {
 						</div> : <Card.Text onClick={
 							() => { this.setState({ isEdit: true }); }}
 						>{this.props.article.content}</Card.Text>}
-						<Image
-						width={200}
-						src="~/Images/castor.jpg"
-						/>
+						
+					{this.props.article.imagePath !== undefined ?
+					<Image
+					width={200}
+					src={this.props.article.imagePath}
+					/> : <p></p>
+					}
 				</Card.Body>
-				<Card.Footer style={{ alignItems: 'left' }}>
-
-					<Button onClick={() => { this.handleDelete() }} >Delete</Button>
+				<Card.Footer>
+				<p style={{fontSize: 15}}><MessageFilled />{this.props.article.comments.length} comments</p>
+					<Button onClick={() => { this.handleDelete() }} ><DeleteFilled />Delete</Button>
 				</Card.Footer>
 			</Card>
 		)

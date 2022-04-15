@@ -11,6 +11,7 @@ export default class ArticleModal extends Component {
 			title: "",
 			content: "",
 			category: "",
+			imagePath: "",
 		}
 	}
 	handleSubmit = (e) => {
@@ -21,6 +22,7 @@ export default class ArticleModal extends Component {
 			category: this.state.category,
 			content: this.state.content,
 			createdAt: new Date(),
+			imagePath: this.state.imagePath,
 			comments: []
 		})
 		this.props.handleCancel();
@@ -34,6 +36,8 @@ export default class ArticleModal extends Component {
 			case "content":
 				this.setState({ content: e.target.value });
 				break;
+			case "imagePath":
+				this.setState({ imagePath: e.target.value });
 			default:
 				break;
 		}
@@ -48,6 +52,7 @@ export default class ArticleModal extends Component {
 		this.setState({
 			title: "",
 			content: "",
+			imagePath: "",
 		})
 	}
 

@@ -6,49 +6,33 @@ export default class extends Component {
     constructor() {
         super();
         this.state = {
-            loginEmail: "",
-            loginPassword: "",
+            email: "",
+            password: "",
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const firebase = new Fire(error => {
-            if (error) {
-                console.error(error);
-                return;
-            }
-            firebase.addArticle({
-                title: this.state.title,
-                content: this.state.content,
-                createdAt: new Date(),
-                comments: []
-            })
+        console.log(this.props.type);
+        const firebase = new Fire();
+        this.props.type === "se connecter"? firebase.login(this.state.email, this.state.password): firebase.register(this.state.email, this.state.password)
+        
+        this.setState({
+            email: "",
+            password: ""
         })
-        this.props.handleCancel();
     }
 
     handleChange = (e) => {
-        this.setState(e.target.id === "title" ? { title: e.target.value } : { content: e.target.value });
+        this.setState(e.target.name === "email" ? { email: e.target.value } : { password: e.target.value });
 
     }
-
-    login = async () => {
-        const auth = new Fire().auth;
-        const user = await auth.signInWithEmailAndPassword(
-            auth,
-            this.state.loginEmail,
-            this.state.loginPassword
-        );
-        console.log(user);
-
-    };
 
     render() {
         return <Modal
             title={this.props.type}
             visible={this.props.isVisible}
-            onOk={this.props.handleCancel}
+            onOk={this.handleSubmit}
             onCancel={this.props.handleCancel}
         >
             <Form>
@@ -57,14 +41,14 @@ export default class extends Component {
                     name="email"
                     rules={[{ required: true, message: 'Veuillez renseigner un email' }]}
                 >
-                    <Input />
+                    <Input name="email" onChange={this.handleChange} />
                 </Form.Item>
                 <Form.Item
                     label="Mot de passe"
                     name="password"
                     rules={[{ required: true, message: 'Mot de passe requis' }]}
                 >
-                    <Input />
+                    <Input name="password" onChange={this.handleChange} />
                 </Form.Item>
             </Form>
         </Modal>;

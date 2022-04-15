@@ -1,10 +1,11 @@
 // import { Card, Avatar } from 'antd'
-import { Row, Col, Avatar } from 'antd';
+import { Row, Col, Avatar, Image } from 'antd';
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import TextArea from 'antd/lib/input/TextArea';
 import { Button } from 'antd'
 import Fire from '../Fire.js';
+
 
 export default class ArticleCell extends Component {
 
@@ -76,6 +77,10 @@ export default class ArticleCell extends Component {
 						</div> : <Card.Text onClick={
 							() => { this.setState({ isEdit: true }); }}
 						>{this.props.article.content}</Card.Text>}
+						<Image
+						width={200}
+						src="~/Images/castor.jpg"
+						/>
 				</Card.Body>
 				<Card.Footer style={{ alignItems: 'left' }}>
 

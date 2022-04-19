@@ -5,6 +5,8 @@ import '../App.css';
 
 import ArticleModal from './ArticleModal';
 
+import Fire from '../Fire'
+
 import logo from '../logo.png';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import ProfileCard from './ProfileCard';
@@ -19,15 +21,13 @@ export default class Header extends Component {
     }
 
   }
-  handleAvatarClick() {
-    // console.log("hello");
-  }
 
   accountMenu = (
     <ProfileCard></ProfileCard>
   )
 
   render() {
+    const firebase = new Fire();
     return <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand>
@@ -42,7 +42,10 @@ export default class Header extends Component {
         </Navbar.Brand>
         <Navbar.Collapse>
           <Nav>
-            <Nav.Link onClick={() => this.setState({ isModalVisible: true })} >Créer article</Nav.Link>
+            {firebase.user != undefined ?
+            <Nav.Link onClick={() => this.setState({ isModalVisible: true })} >Créer article</Nav.Link>:
+            <p></p> 
+            }
           </Nav>
         </Navbar.Collapse>
         {/* <Navbar.Text>

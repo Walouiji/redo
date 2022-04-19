@@ -21,6 +21,11 @@ import {
     signOut
 } from "firebase/auth";
 
+import {
+    getStorage,
+    ref,
+} from "firebase/storage";
+
 const firebaseConfig = {
     apiKey: "AIzaSyCGOG1Er054mWiDHpvdu1MPrCPGdlfCdmQ",
     authDomain: "react-article-da8d6.firebaseapp.com",
@@ -103,4 +108,12 @@ export default class Fire {
             // An error happened.
           });
     };
+
+    //Storage
+
+    storage = getStorage();
+    ref = ref(this.storage);
+
+    imageRef = ref(this.storage, "images")
+
 }

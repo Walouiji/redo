@@ -50,6 +50,12 @@ export default class ArticleForm extends Component {
                     onChange={this.props.handleChange}
                     rows={4}
                 />
+                <label>Image:</label>
+                <Input
+                    value={this.props.imagePath}
+                    id="imagePath"
+                    onChange={this.props.handleChange}
+                />
             </Form>
         )
     }

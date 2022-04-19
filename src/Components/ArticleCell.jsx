@@ -93,9 +93,9 @@ export default class ArticleCell extends Component {
 								<MessageFilled />
 							<p style={{fontSize: 15}}>{this.props.article.comments.length} comments</p>
 							</Col>
-						<Col span={3}>
+						<Col span={3} onClick={() => { this.handleDelete() }}>
 						<DeleteFilled />
-							<p onClick={() => { this.handleDelete() }} style={{fontSize: 15}} >Delete</p>
+							<p style={{fontSize: 15}} >Delete</p>
 							</Col>
 						</Row>
 				</Card.Footer>

@@ -17,15 +17,19 @@ export default class extends Component {
         const firebase = new Fire();
         this.props.type === "se connecter"? firebase.login(this.state.email, this.state.password): firebase.register(this.state.email, this.state.password)
         
-        this.setState({
-            email: "",
-            password: ""
-        })
+        this.props.handleCancel();
     }
 
     handleChange = (e) => {
         this.setState(e.target.name === "email" ? { email: e.target.value } : { password: e.target.value });
 
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            email: "",
+            password: ""
+        })
     }
 
     render() {

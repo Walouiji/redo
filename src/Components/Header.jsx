@@ -21,9 +21,6 @@ export default class Header extends Component {
     }
 
   }
-  handleAvatarClick() {
-    // console.log("hello");
-  }
 
   accountMenu = (
     <ProfileCard></ProfileCard>

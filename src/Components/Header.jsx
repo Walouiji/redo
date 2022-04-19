@@ -7,7 +7,7 @@ import ArticleModal from './ArticleModal';
 
 import Fire from '../Fire'
 
-import logo from '../logo.png';
+import galaxy_icon from '../galaxy_icon.png';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import ProfileCard from './ProfileCard';
 
@@ -33,7 +33,7 @@ export default class Header extends Component {
         <Navbar.Brand>
           <img
             alt=""
-            src={logo}
+            src={galaxy_icon}
             width="30"
             height="30"
             className="d-inline-block align-top"

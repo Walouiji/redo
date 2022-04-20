@@ -7,6 +7,7 @@ import { Button } from 'antd'
 import Fire from '../Fire.js';
 
 import Offcanvas from 'react-bootstrap/Offcanvas'
+import Commentform from './CommentForm.jsx';
 
 
 export default class ArticleCell extends Component {
@@ -92,7 +93,7 @@ export default class ArticleCell extends Component {
 						<Row justify="start">
 							<Col span={4} onClick={() => { this.setState({isOffcanvaVisible: true})}}>
 								<MessageFilled />
-								<p style={{ fontSize: 15 }}>{this.props.article.comments.length} comments</p>
+								<div style={{ fontSize: 15 }}>{this.props.article.comments.length} {this.props.article.comments.length > 1? <p>comments</p>: <p>comment</p>}</div>
 							</Col>
 							<Col span={3} onClick={() => { this.handleDelete() }}>
 								<DeleteFilled />
@@ -105,6 +106,12 @@ export default class ArticleCell extends Component {
 					<Offcanvas.Header>
 						<Offcanvas.Title>Comments</Offcanvas.Title>
 					</Offcanvas.Header>
+					<Offcanvas.Body>
+						<Commentform article={this.props.article} />
+						{this.props.article.comments.map((comment => {
+							<p>{comment.content}</p>
+						}))}
+					</Offcanvas.Body>
 				</Offcanvas>
 			</>
 		)

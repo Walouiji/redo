@@ -6,6 +6,9 @@ import TextArea from 'antd/lib/input/TextArea';
 import { Button } from 'antd'
 import Fire from '../Fire.js';
 
+import Offcanvas from 'react-bootstrap/Offcanvas'
+import Commentform from './CommentForm.jsx';
+
 
 export default class ArticleCell extends Component {
 
@@ -18,6 +21,7 @@ export default class ArticleCell extends Component {
 	constructor() {
 		super();
 		this.state = {
+			isOffcanvaVisible: false,
 			isEdit: false,
 			content: "",
 			author: "",
@@ -27,7 +31,7 @@ export default class ArticleCell extends Component {
 	componentDidMount() {
 		this.setState({
 			content: this.props.article.content,
-			author: this.firebase.user !== null ? this.firebase.user.email: ""
+			author: this.firebase.user !== null ? this.firebase.user.email : ""
 		})
 	}
 
@@ -55,51 +59,61 @@ export default class ArticleCell extends Component {
 
 	render() {
 		const date = new Date(this.props.article.createdAt.seconds * 1000);
-		console.log(this.author);
 		return (
-			<Card style={{ width: 550, marginTop: 16 }} extra={<p>X</p>} >
-				<Card.Header>
-					<Row>
-						<Col span={18} push={2}>
-							<Card.Title style={{ textAlign: 'left' }}>{this.props.article.title}</Card.Title>
-						</Col>
-					</Row>
-					<Card.Subtitle style={{ textAlign: 'left', fontSize: 13 }}>{date.toDateString()} </Card.Subtitle>
-				</Card.Header>
-				<Card.Body>
-					{this.state.isEdit === true ?
-						<div>
-							<TextArea
-								value={this.state.content}
-								onChange={this.handleChange}
-							/>
-							<Button onClick={() => { this.handleUpdate() }}>Update</Button>
-						</div> : <Card.Text onClick={
-							() => { this.setState({ isEdit: true }); }}
-						>{this.props.article.content}</Card.Text>}
-						
-					{this.props.article.imagePath !== undefined ?
-					<Image
-					width={200}
-					src={this.props.article.imagePath}
-					/> : <p></p>
-					}
-				</Card.Body>
-				<Card.Footer>
-				{/* <p style={{fontSize: 15}}><MessageFilled />{this.props.article.comments.length} comments</p> */}
-					{/* <Button onClick={() => { this.handleDelete() }} ><DeleteFilled />Delete</Button> */}
-					<Row justify="start">
-						<Col span={4}>
-								<MessageFilled />
-							<p style={{fontSize: 15}}>{this.props.article.comments.length} comments</p>
-							</Col>
-						<Col span={3} onClick={() => { this.handleDelete() }}>
-						<DeleteFilled />
-							<p style={{fontSize: 15}} >Delete</p>
+			<>
+				<Card style={{ width: 550, marginTop: 16 }} extra={<p>X</p>} >
+					<Card.Header>
+						<Row>
+							<Col span={18} push={2}>
+								<Card.Title style={{ textAlign: 'left' }}>{this.props.article.title}</Card.Title>
 							</Col>
 						</Row>
-				</Card.Footer>
-			</Card>
+						<Card.Subtitle style={{ textAlign: 'left', fontSize: 13 }}>{date.toDateString()} </Card.Subtitle>
+					</Card.Header>
+					<Card.Body>
+						{this.state.isEdit === true ?
+							<div>
+								<TextArea
+									value={this.state.content}
+									onChange={this.handleChange}
+								/>
+								<Button onClick={() => { this.handleUpdate() }}>Update</Button>
+							</div> : <Card.Text onClick={
+								() => { this.setState({ isEdit: true }); }}
+							>{this.props.article.content}</Card.Text>}
+
+						{this.props.article.imagePath !== undefined ?
+							<Image
+								width={200}
+								src={this.props.article.imagePath}
+							/> : <p></p>
+						}
+					</Card.Body>
+					<Card.Footer>
+						<Row justify="start">
+							<Col span={4} onClick={() => { this.setState({isOffcanvaVisible: true})}}>
+								<MessageFilled />
+								<div style={{ fontSize: 15 }}>{this.props.article.comments.length} {this.props.article.comments.length > 1? <p>comments</p>: <p>comment</p>}</div>
+							</Col>
+							<Col span={3} onClick={() => { this.handleDelete() }}>
+								<DeleteFilled />
+								<p style={{ fontSize: 15 }} >Delete</p>
+							</Col>
+						</Row>
+					</Card.Footer>
+				</Card>
+				<Offcanvas show={this.state.isOffcanvaVisible} onHide={() => this.setState({isOffcanvaVisible: false})}>
+					<Offcanvas.Header>
+						<Offcanvas.Title>Comments</Offcanvas.Title>
+					</Offcanvas.Header>
+					<Offcanvas.Body>
+						<Commentform article={this.props.article} />
+						{this.props.article.comments.map((comment => {
+							<p>{comment.content}</p>
+						}))}
+					</Offcanvas.Body>
+				</Offcanvas>
+			</>
 		)
 	}
 }

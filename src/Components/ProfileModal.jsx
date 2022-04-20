@@ -52,7 +52,7 @@ export default class extends Component {
                     name="password"
                     rules={[{ required: true, message: 'Mot de passe requis' }]}
                 >
-                    <Input name="password" onChange={this.handleChange} />
+                    <Input name="password" type={'password'} onChange={this.handleChange} />
                 </Form.Item>
             </Form>
         </Modal>;

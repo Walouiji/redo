@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Form, Input } from 'antd';
 import Fire from '../Fire';
 
-export default class extends Component {
+export default class ProfileModal extends Component {
     constructor() {
         super();
         this.state = {

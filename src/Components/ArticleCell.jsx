@@ -6,8 +6,8 @@ import TextArea from 'antd/lib/input/TextArea';
 import { Button } from 'antd'
 import Fire from '../Fire.js';
 
-import Offcanvas from 'react-bootstrap/Offcanvas'
-import Commentform from './CommentForm.jsx';
+// import Offcanvas from 'react-bootstrap/Offcanvas'
+// import Commentform from './CommentForm.jsx';
 
 
 export default class ArticleCell extends Component {

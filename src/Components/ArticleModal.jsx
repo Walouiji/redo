@@ -40,8 +40,9 @@ export default class ArticleModal extends Component {
 				break;
 			case "imagePath":
 				this.setState({ imagePath: e.target.value });
+				break;
 			default:
-				console.log("nothing");
+				this.setState({ imagePath: e.target.value });
 				break;
 		}
 		//this.setState(e.target.id === "title" ? { title: e.target.value } : { content: e.target.value });

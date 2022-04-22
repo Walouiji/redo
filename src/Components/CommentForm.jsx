@@ -1,7 +1,7 @@
 import { Form, Button } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React, { Component } from 'react';
-import Fire from '../Fire';
+// import Fire from '../Fire';
 
 class Commentform extends Component {
 

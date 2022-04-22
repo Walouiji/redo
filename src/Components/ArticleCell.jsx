@@ -1,4 +1,4 @@
-import { Row, Col, Avatar, Image } from 'antd';
+import { Row, Col, Image } from 'antd';
 import { DeleteFilled, MessageFilled } from '@ant-design/icons'
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
@@ -108,9 +108,9 @@ export default class ArticleCell extends Component {
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<Commentform article={this.props.article} />
-						{this.props.article.comments.map((comment => {
+						{this.props.article.comments.map((comment) => {
 							<p>{comment.content}</p>
-						}))}
+						})}
 					</Offcanvas.Body>
 				</Offcanvas>
 			</>

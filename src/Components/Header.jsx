@@ -42,7 +42,7 @@ export default class Header extends Component {
         </Navbar.Brand>
         <Navbar.Collapse>
           <Nav>
-            {firebase.user != undefined ?
+            {firebase.user !== undefined ?
             <Nav.Link onClick={() => this.setState({ isModalVisible: true })} >Créer article</Nav.Link>:
             <p></p> 
             }

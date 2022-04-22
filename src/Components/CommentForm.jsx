@@ -21,7 +21,7 @@ class Commentform extends Component {
     }
 
     handleClick() {
-        const firebase = new Fire();
+        // const firebase = new Fire();
         this.comments.push(this.state.textComment);
     }
 

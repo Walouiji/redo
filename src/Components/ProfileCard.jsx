@@ -27,7 +27,7 @@ export default class ProfileCard extends Component {
             {firebase.user == null ? 
               <div>
                 <Card.Text>
-                  <a
+                  <p
                     onClick={() =>
                       this.setState({
                         isModalVisible: true,
@@ -36,10 +36,10 @@ export default class ProfileCard extends Component {
                     }
                   >
                     S'inscrire
-                  </a>
+                  </p>
                 </Card.Text>
                 <Card.Text>
-                  <a
+                  <p
                     onClick={() =>
                       this.setState({
                         isModalVisible: true,
@@ -48,7 +48,7 @@ export default class ProfileCard extends Component {
                     }
                   >
                     Se Connecter
-                  </a>
+                  </p>
                 </Card.Text>
               </div>
             : (

@@ -5,7 +5,6 @@ import ArticleModal from './Components/ArticleModal';
 import Header from './Components/Header';
 import ArticleCell from './Components/ArticleCell';
 import Fire from './Fire';
-import { Row, Col } from 'antd';
 
 
 class App extends React.Component {

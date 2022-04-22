@@ -102,7 +102,7 @@ export default class ArticleCell extends Component {
 						</Row>
 					</Card.Footer>
 				</Card>
-				<Offcanvas show={this.state.isOffcanvaVisible} onHide={() => this.setState({isOffcanvaVisible: false})}>
+				{/* <Offcanvas show={this.state.isOffcanvaVisible} onHide={() => this.setState({isOffcanvaVisible: false})}>
 					<Offcanvas.Header>
 						<Offcanvas.Title>Comments</Offcanvas.Title>
 					</Offcanvas.Header>
@@ -112,7 +112,7 @@ export default class ArticleCell extends Component {
 							<p>{comment.content}</p>
 						})}
 					</Offcanvas.Body>
-				</Offcanvas>
+				</Offcanvas> */}
 			</>
 		)
 	}
